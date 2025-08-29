@@ -152,7 +152,7 @@ app.post("/api/ollama/generate", (req, res) => {
   );
 });
 
-app.post("/api/languagetool/check", (req, res) => {
+app.post("/v2/check", (req, res) => {
   const filter = (result) => {
     const filtered = {
       ...result,
@@ -181,11 +181,11 @@ app.post("/api/languagetool/check", (req, res) => {
   handleFormDataPost(`${LANGUAGE_TOOL}/v2/check`, req, res, targetFilter);
 });
 
-app.post("/api/languagetool/add", (req, res) => {
+app.post("/v2/words/add", (req, res) => {
   if (DISABLE_DICTIONARY) {
     res.status(403).send()
     return;
-  } 
+  }
   try {
     addWord(`${req.body.word}`.toLowerCase());
     console.log("added:", `${req.body.word}`.toLowerCase());
@@ -196,7 +196,7 @@ app.post("/api/languagetool/add", (req, res) => {
   }
 });
 
-app.get("/api/languagetool/languages", (req, res) => {
+app.get("/v2/languages", (req, res) => {
   const filter = (data) => {
     if (LANGUAGE_TOOL_LANGUAGES.length === 0) {
       return data;

@@ -86,7 +86,7 @@ interface ExtendedSentenceRange {
 
 export const API = () => {
   const getChecked = (text: string, lang: LangChoice) => {
-    return fetch("/api/languagetool/check", {
+    return fetch("/v2/check", {
       method: "POST",
       body: JSON.stringify({
         text,
@@ -97,7 +97,7 @@ export const API = () => {
   };
 
   const addWord = (word: string) => {
-    return fetch("/api/languagetool/add", {
+    return fetch("/v2/words/add", {
       method: "POST",
       body: JSON.stringify({
         word,
@@ -113,7 +113,7 @@ export const API = () => {
   };
 
   const getLangs = () => {
-    return fetch(`api/languagetool/languages`, {
+    return fetch(`v2/languages`, {
       method: "GET",
     }).then((data) => {
       return data.json();
